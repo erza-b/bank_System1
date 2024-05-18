@@ -270,6 +270,41 @@ public class Main {
     }
 
     private static void browseAccountTransactions(Scanner scanner, Bank bank) {
+        if (bank == null) {
+            System.out.println("No bank created yet.");
+            return;
+        }
+        try {
+            System.out.print("Enter the account ID to view transactions: ");
+            int accountId = scanner.nextInt();
+
+            Account account = bank.getAccounts().stream()
+                    .filter(acc -> acc.getId() == accountId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (account == null) {
+                System.out.println("Account not found.");
+                return;
+            }
+
+            List<Transaction> transactions = account.getTransactionHistory();
+            if (transactions.isEmpty()) {
+                System.out.println("No transactions found for this account.");
+            } else {
+                System.out.println("---------------------------------------------------");
+                System.out.println("Transactions for account " + account.getHolderName() + ":");
+                transactions.forEach(transaction -> {
+                    System.out.println("Amount: " + transaction.getTransactionAmount());
+                    System.out.println("Sender account ID: " + transaction.getTransactionFee());
+                    System.out.println("Recipient account ID: " + transaction.getSenderAccountId());
+                    System.out.println("Reason of the transfer : " + transaction.getReason());
+                    System.out.println("---------------------------------------------------\n");
+                });
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
 
     }
 
