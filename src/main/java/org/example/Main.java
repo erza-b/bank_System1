@@ -96,14 +96,14 @@ public class Main {
     }
 
     private static Bank establishNewBank(Scanner scanner, List<Bank> banks) {
-        System.out.println("---------------------------------------------------");
+        System.out.println("********************************************");
         System.out.print("Enter bank name: ");
         scanner.nextLine();
         String bankName = scanner.nextLine();
         Bank newBank = Bank.createInstitution(bankName, new ArrayList<>());
         banks.add(newBank);
         System.out.println("Bank successfully established: " + bankName);
-        System.out.println("---------------------------------------------------");
+        System.out.println("********************************************");
         return newBank;
     }
 
@@ -112,7 +112,7 @@ public class Main {
             System.out.println("No banks available yet.");
             return;
         }
-        System.out.println("---------------------------------------------------");
+        System.out.println("********************************************");
         System.out.print("Enter account holder's name: ");
         scanner.nextLine();
         String accountHolderName = scanner.nextLine();
@@ -121,17 +121,17 @@ public class Main {
         Account account = new Account(bank.getAccounts().size() + 1, accountHolderName, balance);
         bank.addAccount(account);
         System.out.println("Account successfully created. Account ID: " + account.getId());
-        System.out.println("---------------------------------------------------");
+        System.out.println("********************************************");
     }
 
     private static void handleTransaction(Scanner scanner, Bank bank) {
         if (bank == null || bank.getAccounts().isEmpty()) {
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
             System.out.println("No bank or accounts created yet.");
             return;
         }
         try {
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
             System.out.print("Enter your account ID: ");
             int accountId = scanner.nextInt();
             System.out.print("Enter the amount you want to transfer: ");
@@ -184,7 +184,7 @@ public class Main {
 
             System.out.println("Transaction success! New balance in " + sender.getHolderName() + ": " + sender.getCurrentBalance());
             System.out.println("New balance in " + recipient.getHolderName() + ": " + recipient.getCurrentBalance());
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
@@ -197,7 +197,7 @@ public class Main {
             return;
         }
         try {
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
             System.out.print("Enter your account ID: ");
             int accountId = scanner.nextInt();
 
@@ -226,7 +226,7 @@ public class Main {
 
             account.withdrawAmount(amount);
             System.out.println("Withdrawal success! New balance: " + account.getCurrentBalance());
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
@@ -239,7 +239,7 @@ public class Main {
             return;
         }
         try {
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
             System.out.print("Enter your account ID: ");
             int accountId = scanner.nextInt();
 
@@ -263,7 +263,7 @@ public class Main {
 
             account.depositAmount(amount);
             System.out.println("Deposit success! New balance: " + account.getCurrentBalance());
-            System.out.println("---------------------------------------------------");
+            System.out.println("********************************************");
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
@@ -292,14 +292,14 @@ public class Main {
             if (transactions.isEmpty()) {
                 System.out.println("No transactions found for this account.");
             } else {
-                System.out.println("---------------------------------------------------");
+                System.out.println("********************************************");
                 System.out.println("Transactions for account " + account.getHolderName() + ":");
                 transactions.forEach(transaction -> {
                     System.out.println("Amount: " + transaction.getTransactionAmount());
                     System.out.println("Sender account ID: " + transaction.getTransactionFee());
                     System.out.println("Recipient account ID: " + transaction.getSenderAccountId());
                     System.out.println("Reason of the transfer : " + transaction.getReason());
-                    System.out.println("---------------------------------------------------\n");
+                    System.out.println("********************************************");
                 });
             }
         } catch (Exception e) {
@@ -310,6 +310,30 @@ public class Main {
 
     private static void checkAccountBalance(Scanner scanner, Bank bank) {
 
+        if (bank == null) {
+            System.out.println("No bank created yet.");
+            return;
+        }
+        try {
+            System.out.println("********************************************");
+            System.out.print("Enter the account ID to view total balance: ");
+            int accountId = scanner.nextInt();
+
+            Account account = bank.getAccounts().stream()
+                    .filter(acc -> acc.getId() == accountId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (account == null) {
+                System.out.println("Account not found.");
+                return;
+            }
+
+            System.out.println("Balance for account " + account.getHolderName() + ": " + account.getCurrentBalance());
+            System.out.println("********************************************");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
     }
 
     private static void displayBankAccounts(List<Bank> banks) {
