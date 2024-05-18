@@ -364,6 +364,21 @@ public class Main {
     }
 
     private static void verifyTotalTransactionFee(Bank bank) {
+        if (bank == null) {
+            System.out.println("No bank created yet.");
+            return;
+        }
+        try {
+            System.out.println("********************************************");
+            double totalTransactionFee = bank.getAccounts().stream()
+                    .flatMap(account -> account.getTransactionHistory().stream())
+                    .mapToDouble(Transaction::getTransactionFee)
+                    .sum();
+            System.out.println("Total transaction fee amount in the bank: $" + totalTransactionFee);
+            System.out.println("********************************************");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
 
     }
 
