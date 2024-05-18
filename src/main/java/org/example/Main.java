@@ -384,6 +384,22 @@ public class Main {
 
     private static void verifyTotalTransferAmount(Bank bank) {
 
+
+        if (bank == null) {
+            System.out.println("No bank created yet.");
+            return;
+        }
+        try {
+            System.out.println("********************************************");
+            double totalTransferAmount = bank.getAccounts().stream()
+                    .flatMap(account -> account.getTransactionHistory().stream())
+                    .mapToDouble(Transaction::getTransactionAmount)
+                    .sum();
+            System.out.println("Total transfer amount in the bank: $" + totalTransferAmount);
+            System.out.println("********************************************");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
     }
 
     private static void terminateProgram() {
