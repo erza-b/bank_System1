@@ -60,7 +60,17 @@ public class Transaction implements TransactionInt {
 
     @Override
     public double calculateFee(double amount, double flatFee, double percentFee, int feeType) {
-       return 1;
+        switch (feeType) {
+            case 1:
+                System.out.println("Flat fee applied: $" + flatFee);
+                return flatFee;
+            case 2:
+                System.out.println("Percent fee applied: " + percentFee + "%");
+                return (percentFee / 100) * amount;
+            default:
+                System.out.println("Invalid fee type. Applying default flat fee.");
+                return flatFee;
+        }
     }
 
     @Override
