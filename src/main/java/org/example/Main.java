@@ -192,10 +192,81 @@ public class Main {
 
     private static void handleWithdrawal(Scanner scanner, Bank bank) {
 
+        if (bank == null || bank.getAccounts().isEmpty()) {
+            System.out.println("No bank or accounts created yet.");
+            return;
+        }
+        try {
+            System.out.println("---------------------------------------------------");
+            System.out.print("Enter your account ID: ");
+            int accountId = scanner.nextInt();
+
+            Account account = bank.getAccounts().stream()
+                    .filter(acc -> acc.getId() == accountId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (account == null) {
+                System.out.println("Account not found.");
+                return;
+            }
+
+            System.out.print("Enter the amount you want to withdraw: ");
+            double amount = scanner.nextDouble();
+
+            if (amount <= 0) {
+                System.out.println("Invalid amount.");
+                return;
+            }
+
+            if (!account.hasSufficientBalance(amount)) {
+                System.out.println("Insufficient balance to perform this withdrawal!");
+                return;
+            }
+
+            account.withdrawAmount(amount);
+            System.out.println("Withdrawal success! New balance: " + account.getCurrentBalance());
+            System.out.println("---------------------------------------------------");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
     }
 
     private static void handleDeposit(Scanner scanner, Bank bank) {
 
+        if (bank == null || bank.getAccounts().isEmpty()) {
+            System.out.println("No bank or accounts created yet.");
+            return;
+        }
+        try {
+            System.out.println("---------------------------------------------------");
+            System.out.print("Enter your account ID: ");
+            int accountId = scanner.nextInt();
+
+            Account account = bank.getAccounts().stream()
+                    .filter(acc -> acc.getId() == accountId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (account == null) {
+                System.out.println("Account not found.");
+                return;
+            }
+
+            System.out.print("Enter the amount you want to deposit: ");
+            double amount = scanner.nextDouble();
+
+            if (amount <= 0) {
+                System.out.println("Invalid amount.");
+                return;
+            }
+
+            account.depositAmount(amount);
+            System.out.println("Deposit success! New balance: " + account.getCurrentBalance());
+            System.out.println("---------------------------------------------------");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
     }
 
     private static void browseAccountTransactions(Scanner scanner, Bank bank) {
