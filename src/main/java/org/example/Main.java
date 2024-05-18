@@ -337,6 +337,29 @@ public class Main {
     }
 
     private static void displayBankAccounts(List<Bank> banks) {
+        if (banks.isEmpty()) {
+            System.out.println("No banks created yet.");
+            return;
+        }
+        try {
+            System.out.println("********************************************");
+            banks.forEach(bank -> {
+                List<Account> accounts = bank.getAccounts();
+                if (accounts.isEmpty()) {
+                    System.out.println("No accounts found in the bank: " + bank.getName());
+                } else {
+                    System.out.println("List of " + bank.getName() + " bank accounts:");
+                    accounts.forEach(account ->
+                            System.out.println("Account ID: " + account.getId() +
+                                    ", Name: " + account.getHolderName() +
+                                    ", Balance: " + account.getCurrentBalance() +
+                                    ", Bank name: " + bank.getName()));
+                }
+            });
+            System.out.println("********************************************");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
 
     }
 
