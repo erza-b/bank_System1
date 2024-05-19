@@ -4,6 +4,7 @@ import org.example.interfaces.AccountInt;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Account implements AccountInt {
 
     private int id;
@@ -69,5 +70,14 @@ public class Account implements AccountInt {
 
     public List<Transaction> getTransactionHistory() {
         return transactionHistory;
+    }
+    @Override
+    public String printAccountDetails(String name, double balance) {
+        return "Holder Name: " + name + ", Current Balance: $" + balance;
+    }
+
+    @Override
+    public boolean canWithdraw(double amount) {
+        return currentBalance >= amount;
     }
 }
