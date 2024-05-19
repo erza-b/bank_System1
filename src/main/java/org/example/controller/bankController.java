@@ -1,5 +1,4 @@
-package com.example.BankSystemSpringBoot.controller;
-
+package org.example.controller;
 
 import org.example.Dto.AccountDto;
 import org.example.Dto.TransactionDto;
@@ -16,11 +15,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class BankController {
+public class bankController {
     private final bankService BankService;
     private int accountIdCounter = 1;
 
-    public BankController(bankService bankService) {
+    public bankController(bankService bankService) {
         this.BankService = bankService;
     }
 
@@ -29,7 +28,7 @@ public class BankController {
         try {
             accountDto.setAccountId(accountIdCounter++);
 
-            AccountDto createdAccount = bankService.createAccount(accountDto);
+            AccountDto createdAccount = BankService.createAccount(accountDto);
 
             Map<String, Object> response = new HashMap<>();
             response.put("name", createdAccount.getName());
@@ -47,7 +46,7 @@ public class BankController {
     @PostMapping("/transactions")
     public ResponseEntity<?> performTransaction(@RequestBody TransactionDto transactionDto) {
         try {
-            TransactionDto createdTransaction = bankService.performTransaction(transactionDto);
+            TransactionDto createdTransaction = BankService.performTransaction(transactionDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error performing transaction: " + e.getMessage());
