@@ -24,7 +24,7 @@ This is a console-based bank system application developed in Java. The applicati
 
 ### Installation
 1. Clone the repository from GitHub:
-``` git clone [https://github.com/yourusername/bank-system-console.git](https://github.com/erza-b/bank_System1.git) ```
+``` git clone https://github.com/erza-b/bank_System1.git ```
 2. Navigate to the project directory:
 ```cd bank-system-console```
 3. Build the project using Maven:
