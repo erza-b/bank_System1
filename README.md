@@ -24,18 +24,19 @@ This is a console-based bank system application developed in Java. The applicati
 
 ### Installation
 1. Clone the repository from GitHub:
-** bash** ** git clone https://github.com/yourusername/bank-system-console.git** ** **
+``` git clone https://github.com/yourusername/bank-system-console.git ```
 2. Navigate to the project directory:
-** bash** ** cd bank-system-console** ** **
+```cd bank-system-console```
 3. Build the project using Maven:
-** bash** ** mvn clean install** ** **
+```mvn clean install```
 
 ## Running the Application
 
 1. Run the application:
-** bash** ** mvn spring-boot:run** ** **
+```mvn spring-boot:run``` 
 2. Follow the on-screen instructions to navigate through the menu options and use the application.
 ## Using Postman for Testing RESTful APIs
 
 This application includes RESTful API endpoints for managing bank accounts and transactions. You can use Postman to test these endpoints. The base URL for the API is: http://localhost:8080/api/accounts
+![Description of the image](images/img1.png)
 
