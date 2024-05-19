@@ -35,3 +35,7 @@ This is a console-based bank system application developed in Java. The applicati
 1. Run the application:
 ** bash** ** mvn spring-boot:run** ** **
 2. Follow the on-screen instructions to navigate through the menu options and use the application.
+## Using Postman for Testing RESTful APIs
+
+This application includes RESTful API endpoints for managing bank accounts and transactions. You can use Postman to test these endpoints. The base URL for the API is: http://localhost:8080/api/accounts
+
